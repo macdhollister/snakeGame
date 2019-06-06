@@ -9,32 +9,8 @@ class Snake {
     constructor(BOARD_WIDTH, BOARD_HEIGHT) {
         this.positions = [
             {
-                x: 6,
-                y: 0
-            },
-            {
-                x: 5,
-                y: 0
-            },
-            {
-                x: 4,
-                y: 0
-            },
-            {
-                x: 3,
-                y: 0
-            },
-            {
-                x: 2,
-                y: 0
-            },
-            {
-                x: 1,
-                y: 0
-            },
-            {
-                x: 0,
-                y: 0
+                x: BOARD_WIDTH/2,
+                y: BOARD_HEIGHT/2
             },
         ]
         this.speed = {
@@ -60,7 +36,7 @@ class Snake {
     // ---------- Setters ----------
 
     // Move the snake
-    move() {
+    move(foodLocation) {
         this._setNewSpeed();
 
         let temp = Object.assign({}, this.positions[0]);
@@ -72,15 +48,24 @@ class Snake {
             .filter(pos => pos.x === temp.x && pos.y === temp.y).length > 0 ||
             temp.x < 0 || this.boardWidth <= temp.x ||
             temp.y < 0 || this.boardHeight <= temp.y
-            ) {
-                this.gameOver = true;
+        ) {
+            this.gameOver = true;
         }
         if (this.gameOver) return;
 
 
         this.positions.unshift(temp)
 
-        this.positions.pop();
+        let distToFood = Math.sqrt(
+            Math.pow(this.positions[0].x - foodLocation.x, 2) +
+            Math.pow(this.positions[0].y - foodLocation.y, 2)
+        );
+        if (distToFood === 0) {
+            return true;
+        } else {
+            this.positions.pop();
+            return false;
+        }
     }
 
     // Change snake's direction
