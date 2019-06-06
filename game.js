@@ -22,8 +22,8 @@ window.onkeydown = function(e) {
     const key = e.keyCode;
     if (36 < key && key < 41) e.preventDefault();
 
-    // sn.setDirection(key);
-    console.log(key);
+    sn.changeDirection(key);
+    // console.log(key);
 }
 
 // New frame every 200 milliseconds
@@ -32,9 +32,7 @@ setInterval(() => {
     ctx.fillStyle = '#000000';
     ctx.fillRect(0,0,canvas.width,canvas.height);
 
-    
-
-
+    sn.move();
 
 
 
@@ -42,4 +40,4 @@ setInterval(() => {
     // repaint canvas with new snake position
     ctx.fillStyle = '#ffffff';
     ctx.fillRect(sn.getPos().x * GRID_SIZE, sn.getPos().y * GRID_SIZE, 50, 50)
-}, 200);
+}, 100);
