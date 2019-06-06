@@ -4,6 +4,7 @@ const BOARD_HEIGHT = 14;
 const GRID_SIZE = 50;
 
 const sn = new Snake(BOARD_WIDTH, BOARD_HEIGHT);
+let food = new Food(sn.getPos(), BOARD_WIDTH, BOARD_HEIGHT);
 
 // Create canvas and context variables
 const canvas = document.getElementById('myCanvas');
@@ -33,6 +34,10 @@ setInterval(() => {
     ctx.fillRect(0,0,canvas.width,canvas.height);
 
     sn.move();
+
+    // Paint food (before snake)
+    ctx.fillStyle = '#1fa51f';
+    ctx.fillRect(food.getPos().x * GRID_SIZE, food.getPos().y * GRID_SIZE, GRID_SIZE, GRID_SIZE);
 
     // repaint canvas with new snake position
     let positions = sn.getPos();
