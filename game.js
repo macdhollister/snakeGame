@@ -34,10 +34,10 @@ setInterval(() => {
 
     sn.move();
 
-
-
-
     // repaint canvas with new snake position
     ctx.fillStyle = '#ffffff';
-    ctx.fillRect(sn.getPos().x * GRID_SIZE, sn.getPos().y * GRID_SIZE, 50, 50)
+    let positions = sn.getPos();
+    for (let i = 0; i < positions.length; i++) {
+        ctx.fillRect(positions[i].x * GRID_SIZE, positions[i].y * GRID_SIZE, 50, 50)
+    }
 }, 100);
