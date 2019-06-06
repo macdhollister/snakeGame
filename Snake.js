@@ -7,10 +7,13 @@
  */
 class Snake {
     constructor() {
-        this.position = {
-            x: 0,
-            y: 0
-        }
+        this.positions = [
+            {
+                x: 0,
+                y: 0
+            }
+        ]
+
         this.speed = {
             xspeed: 1,
             yspeed: 0
@@ -24,17 +27,24 @@ class Snake {
 
     // ---------- Getters ----------
 
-    // Return snake's position
+    // Return snake's positions as an array
     getPos() {
-        return this.position;
+        return this.positions;
     }
 
     // ---------- Setters ----------
 
     move() {
         this._setNewSpeed();
-        this.position.x += this.speed.xspeed;
-        this.position.y += this.speed.yspeed;
+
+        let temp = Object.assign({}, this.positions[0]);
+
+        temp.x += this.speed.xspeed;
+        temp.y += this.speed.yspeed;
+
+        this.positions.unshift(temp)
+
+        this.positions.pop();
     }
 
     // Change snake's direction
