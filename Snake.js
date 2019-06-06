@@ -6,7 +6,7 @@
  * 
  */
 class Snake {
-    constructor() {
+    constructor(BOARD_WIDTH, BOARD_HEIGHT) {
         this.positions = [
             {
                 x: 6,
@@ -46,6 +46,8 @@ class Snake {
             yspeed: 0
         }
         this.gameOver = false;
+        this.boardWidth = BOARD_WIDTH;
+        this.boardHeight = BOARD_HEIGHT;
     }
 
     // ---------- Getters ----------
@@ -58,7 +60,7 @@ class Snake {
     // ---------- Setters ----------
 
     // Move the snake
-    move(boardWidth, boardHeight) {
+    move() {
         this._setNewSpeed();
 
         let temp = Object.assign({}, this.positions[0]);
@@ -68,8 +70,8 @@ class Snake {
 
         if (this.positions
             .filter(pos => pos.x === temp.x && pos.y === temp.y).length > 0 ||
-            temp.x < 0 || boardWidth <= temp.x ||
-            temp.y < 0 || boardHeight <= temp.y
+            temp.x < 0 || this.boardWidth <= temp.x ||
+            temp.y < 0 || this.boardHeight <= temp.y
             ) {
                 this.gameOver = true;
         }

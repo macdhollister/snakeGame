@@ -3,7 +3,7 @@ const BOARD_WIDTH = 14;
 const BOARD_HEIGHT = 14;
 const GRID_SIZE = 50;
 
-const sn = new Snake();
+const sn = new Snake(BOARD_WIDTH, BOARD_HEIGHT);
 
 // Create canvas and context variables
 const canvas = document.getElementById('myCanvas');
@@ -32,7 +32,7 @@ setInterval(() => {
     ctx.fillStyle = '#000000';
     ctx.fillRect(0,0,canvas.width,canvas.height);
 
-    sn.move(BOARD_WIDTH, BOARD_HEIGHT);
+    sn.move();
 
     // repaint canvas with new snake position
     let positions = sn.getPos();
