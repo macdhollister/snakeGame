@@ -24,7 +24,6 @@ window.onkeydown = function(e) {
     if (36 < key && key < 41) e.preventDefault();
 
     sn.changeDirection(key);
-    // console.log(key);
 }
 
 // New frame every 200 milliseconds
@@ -32,12 +31,15 @@ setInterval(() => {
     // clear the canvas
     ctx.fillStyle = '#000000';
     ctx.fillRect(0,0,canvas.width,canvas.height);
+    let foodLocation = food.getPos();
+    let snakeAteFood = sn.move(foodLocation);
 
-    sn.move();
+    // console.log(snakeAteFood);
+    if (snakeAteFood) food = new Food(sn.getPos(), BOARD_WIDTH, BOARD_HEIGHT);
 
     // Paint food (before snake)
     ctx.fillStyle = '#1fa51f';
-    ctx.fillRect(food.getPos().x * GRID_SIZE, food.getPos().y * GRID_SIZE, GRID_SIZE, GRID_SIZE);
+    ctx.fillRect(foodLocation.x * GRID_SIZE, foodLocation.y * GRID_SIZE, GRID_SIZE, GRID_SIZE);
 
     // repaint canvas with new snake position
     let positions = sn.getPos();
@@ -48,4 +50,4 @@ setInterval(() => {
     for (let i = 1; i < positions.length; i++) {
         ctx.fillRect(positions[i].x * GRID_SIZE + GRID_SIZE/20, positions[i].y * GRID_SIZE + GRID_SIZE/20, 9*GRID_SIZE/10, 9*GRID_SIZE/10)
     }
-}, 100);
+}, 150);
